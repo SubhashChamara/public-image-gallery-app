@@ -50,4 +50,95 @@ function loadAllImages() {
 };
 
 
+dropZone.on('dragover',(event)=>{
+    event.preventDefault();
+});
+dropZone.on('drop',(event)=>{
+
+    console.log("list",event.originalEvent.dataTransfer.files)
+    event.preventDefault();
+    const droppedFiles = event.originalEvent
+    .dataTransfer.files;
+    console.log(droppedFiles)
+    let imageFiles = Array.from(droppedFiles).filter(file=>file.type.startsWith("image/"));
+    if (!imageFiles.length) return;
+    overlay.addClass("d-none");
+    console.log(imageFiles,"uploaded");
+    console.log(cloudImageList)
+    let cloneImageFiles = imageFiles.slice();
+    imageFiles.forEach(image=>{
+
+        cloudImageList.forEach(cloudImage=> {
+            console.log(image.name,cloudImage.replace(REST_API_URL,"").replace("/",""));
+            if (image.name == cloudImage.replace(REST_API_URL, "").replace("/", "")) {
+                alert(`Image name ${image.name} is already exist`);
+                cloneImageFiles=cloneImageFiles.filter(image=> image.name != cloudImage.replace(REST_API_URL, "").replace("/", ""));
+            }
+        });
+
+    });
+    imageFiles=cloneImageFiles;
+    if(!imageFiles.length) return;
+
+    dropSvg.removeClass('animate__fadeInUp')
+    dropSvg.addClass('animate__bounceOutUp animate__slow');
+    setTimeout(overlay.addClass('d-none'),2000)
+    dropSvg.removeClass('animate__bounceOutUp animate__slow');
+    dropSvg.addClass('animate__fadeInUp');
+    console.log("file",imageFiles)
+    uploadImages(imageFiles);
+
+});
+overlay.on('drop',(event)=>{
+    event.preventDefault();
+});
+overlay.on('dragover',(event)=>{
+    event.preventDefault();
+})
+
+function uploadImages(imageFiles) {
+    const formData=new FormData();
+    imageFiles.forEach(imageFile=>{
+        let divElm = $('<div class="image loader"></div>');
+        divElm.append(cssLoaderHtml);
+        $('#image-container').append(divElm);
+        formData.append("images",imageFile);
+    });
+    let jqxhr = $.ajax(`${REST_API_URL}`,{
+        method:"POST",
+        data:formData,
+        contentType:false,
+        processData:false
+    });
+    jqxhr.done((imageUrlList) => {
+        cloudImageList=imageUrlList;
+        imageUrlList.forEach(url =>{
+            let divElm = $('.image.loader').first();
+            divElm.css('background-image', `url('${url}')`);
+            divElm.empty();
+
+            divElm.removeClass('loader');
+        });
+    });
+    jqxhr.fail(() => {
+
+    });
+    jqxhr.always(() => {
+        $('.image.loader').remove();
+    });
+}
+
+$('#image-container').on('click','.image',(event)=>{
+    event.target.requestFullscreen();
+
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.fixed-action-btn');
+    var instances = M.FloatingActionButton.init(elems, {
+        direction: 'top'
+    });
+});
+
 
