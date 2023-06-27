@@ -35,7 +35,6 @@ function loadAllImages() {
         let i=0;
         cloudImageList=imageUriList;
         imageUriList.forEach(imageUrl=>{
-            console.log(i,imageUrl);
             i++;
             const image = $('<div class="image"></div>').css('background-image',`url('${imageUrl}')`);
             const iconDownload=$(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"  class="bi bi-download icon-download" viewBox="0 0 16 16">
@@ -52,7 +51,6 @@ $('#image-container').on('click','svg',(eventData)=>{
 
     let imageUrl = $(eventData.target).parents('.image').css('background-image').replace('url("', '').replace('")', '');
     let fileName = imageUrl.replace(REST_API_URL,"").replace("/","");
-    console.log(imageUrl)
     function downloadImage(url,filename) {
         let link = document.createElement('a');
         link.href = url;
@@ -72,21 +70,17 @@ dropZone.on('dragover',(event)=>{
 });
 dropZone.on('drop',(event)=>{
 
-    console.log("list",event.originalEvent.dataTransfer.files)
     event.preventDefault();
     const droppedFiles = event.originalEvent
     .dataTransfer.files;
-    console.log(droppedFiles)
+
     let imageFiles = Array.from(droppedFiles).filter(file=>file.type.startsWith("image/"));
     if (!imageFiles.length) return;
     overlay.addClass("d-none");
-    console.log(imageFiles,"uploaded");
-    console.log(cloudImageList)
     let cloneImageFiles = imageFiles.slice();
     imageFiles.forEach(image=>{
 
         cloudImageList.forEach(cloudImage=> {
-            console.log(image.name,cloudImage.replace(REST_API_URL,"").replace("/",""));
             if (image.name == cloudImage.replace(REST_API_URL, "").replace("/", "")) {
                 alert(`Image name ${image.name} is already exist`);
                 cloneImageFiles=cloneImageFiles.filter(image=> image.name != cloudImage.replace(REST_API_URL, "").replace("/", ""));
@@ -102,7 +96,6 @@ dropZone.on('drop',(event)=>{
     setTimeout(overlay.addClass('d-none'),2000)
     dropSvg.removeClass('animate__bounceOutUp animate__slow');
     dropSvg.addClass('animate__fadeInUp');
-    console.log("file",imageFiles)
     uploadImages(imageFiles);
 
 });
@@ -149,7 +142,6 @@ $('#image-container').on('click','.image',(event)=>{
     event.target.requestFullscreen();
 
 });
-
 
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.fixed-action-btn');
