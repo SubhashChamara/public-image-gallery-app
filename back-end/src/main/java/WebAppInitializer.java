@@ -1,4 +1,5 @@
 
+import api.CorsFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -26,6 +27,10 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
         String tempDir = System.getProperty("java.io.tmpdir");
         MultipartConfigElement multipartConfigElement = new MultipartConfigElement(tempDir);
         registration.setMultipartConfig(multipartConfigElement);
+    }
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{new CorsFilter()};
     }
 
     
