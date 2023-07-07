@@ -51,16 +51,7 @@ $('#image-container').on('click','svg',(eventData)=>{
 
     let imageUrl = $(eventData.target).parents('.image').css('background-image').replace('url("', '').replace('")', '');
     let fileName = imageUrl.replace(REST_API_URL,"").replace("/","");
-    function downloadImage(url,filename) {
-        let link = document.createElement('a');
-        link.href = url;
-        link.download = filename;
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-
+   
     saveAs(imageUrl, fileName);
 
 });
