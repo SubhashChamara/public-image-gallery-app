@@ -28,6 +28,8 @@ Back-End
 - Maven (Build Tool)
 - CORS Filters
 
+  https://github.com/SubhashChamara/public-image-gallery-app/blob/09a40c5a7399520a7d64c0f43f85a09e9df40082/img/sample1.png
+
 ### 2.How to try this project
   
   To try out the project, please follow these Git commands in your terminal:
