@@ -34,8 +34,10 @@ Back-End
   
   To try out the project, please follow these Git commands in your terminal:
   1. Clone the Project 
+    ```
     git clone https://github.com/SubhashChamara/public-image-gallery-app.git
-  2. Get the dependencies
+    ```
+  3. Get the dependencies
     npm i
   Then execute the application  
   
