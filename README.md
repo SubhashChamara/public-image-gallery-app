@@ -28,7 +28,10 @@ Back-End
 - Maven (Build Tool)
 - CORS Filters
 
-  https://github.com/SubhashChamara/public-image-gallery-app/blob/09a40c5a7399520a7d64c0f43f85a09e9df40082/img/sample1.png
+Project Demo
+
+https://github.com/SubhashChamara/public-image-gallery-app/assets/112160411/13cf8d57-902c-4110-a254-e795d258062f
+
 
 ### 2.How to try this project
   
@@ -53,8 +56,6 @@ Back-End
 - GitHub-https://github.com/SubhashChamara
 - Linkedin-https://www.linkedin.com/in/subhash-chamara-udayanga-633578174/
 - Twitter-https://twitter.com/chamara_subhash?t=e7Qt_Z5c0eEg426tqdXxrQ&s=09
-
-
 
 ### License
 Copyright &copy; 2023 | Subhash Chamara Udayanga | All Rights Reserved.
