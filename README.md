@@ -58,4 +58,6 @@ https://github.com/SubhashChamara/public-image-gallery-app/assets/112160411/13cf
 - Twitter-https://twitter.com/chamara_subhash?t=e7Qt_Z5c0eEg426tqdXxrQ&s=09
 
 ### License
+This application is licensed under this [license](License.txt)
+
 Copyright &copy; 2023 | Subhash Chamara Udayanga | All Rights Reserved.
